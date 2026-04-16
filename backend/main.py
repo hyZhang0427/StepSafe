@@ -45,6 +45,20 @@ def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
+@app.get("/api/debug-env")
+def debug_env():
+    return {
+        "ABN_API_GUID_loaded": bool(os.getenv("ABN_API_GUID")),
+        "DB_HOST": os.getenv("DB_HOST"),
+        "DB_PORT": os.getenv("DB_PORT"),
+        "DB_NAME": os.getenv("DB_NAME"),
+        "DB_USER": os.getenv("DB_USER"),
+        "DB_PASSWORD_loaded": bool(os.getenv("DB_PASSWORD")),
+        "OCR_LANGUAGE": os.getenv("PYMUPDF_OCR_LANGUAGE"),
+        "OCR_DPI": os.getenv("PYMUPDF_OCR_DPI"),
+    }
+
+
 @app.get("/api/debug-db")
 def debug_db():
     try:
